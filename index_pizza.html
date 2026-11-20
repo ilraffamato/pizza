@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#ebdcc0">
+<meta name="apple-mobile-web-app-title" content="Cassa">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Cassa – Pizzeria San Lazzaro</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ebdcc0;--red:#92192e;--grn:#277837;--org:#d27b19;--tan:#ccac83;--paper:#f7eedb}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--red);font:700 16px Lexend,system-ui,sans-serif;touch-action:manipulation;-webkit-user-select:none;user-select:none;padding-bottom:110px;text-align:center}
+button{font:inherit;color:inherit;cursor:pointer}
+input{font:inherit;-webkit-user-select:text;user-select:text}
+.wrap{max-width:1000px;margin:0 auto;padding:0 14px}.wrap.n{max-width:720px}
+.logo{padding:22px 0 10px;line-height:1.1}
+.logo b{display:block;font-size:34px;letter-spacing:.3em;margin-right:-.3em;font-weight:800}
+.logo span{display:block;font-size:23px;letter-spacing:.22em;margin-right:-.22em;font-weight:800;margin-top:2px}
+.logo small{display:block;margin-top:6px;font-size:12px;letter-spacing:.16em;color:#b15d60}
+.tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:12px 14px;position:sticky;top:0;background:var(--bg);z-index:5;border-bottom:2px solid var(--tan)}
+.tabs button{min-width:46px;height:46px;padding:0 14px;border:3px solid var(--c);border-radius:23px;background:none;color:var(--c);font-size:17px;font-weight:800}
+.tabs button.on{background:var(--c);color:#fff}
+.tabs .sep{width:2px;background:var(--tan);margin:0 4px}
+.base{display:block;width:100%;margin-top:16px;padding:16px;border:3px solid var(--red);border-radius:18px;background:var(--org);color:#fff;font-size:24px;font-weight:800;letter-spacing:.14em;box-shadow:0 4px 0 var(--red)}.base small{display:block;margin-top:4px;font-size:14px;letter-spacing:.04em;font-weight:500}
+.row{display:flex;align-items:center;gap:8px;width:100%;padding:12px;border:3px solid var(--red);border-radius:14px;background:var(--paper);margin-bottom:8px;text-align:left}.row .nm{flex:1;font-size:17px}.row small{display:block;margin-top:3px;font-size:13px;font-weight:500;color:#7a2a38}
+.lbl{display:block;text-align:left;margin:14px 0 6px;font-size:13px;letter-spacing:.1em}.t.l{text-align:left}textarea.t{min-height:96px;resize:vertical}
+.stats{display:flex;justify-content:space-around;gap:8px}.stats div{flex:1;font-size:13px;letter-spacing:.08em}.stats b{display:block;font-size:24px;letter-spacing:0;margin-bottom:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;padding:16px 0}
+.pz{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:96px;padding:14px 10px;border:3px solid var(--c);border-radius:16px;background:var(--paper);color:var(--c);font-weight:800;font-size:18px;line-height:1.2}
+.qm{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;background:var(--org);color:#fff;font-size:15px;line-height:24px}
+.pill{display:inline-block;background:var(--c,var(--red));color:#fff;border-radius:99px;padding:3px 14px;font-size:14px;font-style:normal}
+.bar{display:grid;grid-template-columns:130px 1fr 130px;align-items:center;gap:8px;padding:12px 14px;position:sticky;top:0;background:var(--bg);z-index:5;border-bottom:2px solid var(--tan)}
+.bar h2{margin:0;font-size:23px;letter-spacing:.08em}
+.bar .btn{padding:10px 12px}
+.btn{border:3px solid var(--red);background:none;color:var(--red);border-radius:14px;padding:13px 18px;font-weight:800}
+.btn.fill{background:var(--red);color:#fff}.btn.org{border-color:var(--org);color:var(--org)}.btn.org.fill{background:var(--org);color:#fff}
+.btn:disabled{opacity:.35}
+.box{background:var(--paper);border:3px solid var(--red);border-radius:16px;padding:16px;margin:14px 0}
+.box.o{border-color:var(--org)}.box h3{margin:0 0 12px;font-size:17px;letter-spacing:.14em}
+.box.o h3{color:var(--org)}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.chip{border:3px solid var(--org);border-radius:99px;background:none;color:var(--org);padding:10px 18px;font-weight:700}
+.chip.on{background:var(--org);color:#fff}.chip:disabled{opacity:.3}
+.sub{margin-top:16px!important}
+.ing{display:flex;align-items:center;gap:8px;padding:10px 0;border-top:2px solid var(--tan)}
+.ing:first-of-type{border-top:0}
+.ing span{flex:1;font-size:19px;text-align:left}
+.ing.x span{text-decoration:line-through;opacity:.45}
+.ing button{border:3px solid var(--red);background:none;border-radius:12px;padding:10px 14px;font-weight:700;color:var(--red)}
+.ing button.on{background:var(--red);color:#fff}
+.empty{font-weight:500;font-size:15px;color:#7a2a38;line-height:1.4}
+.m{font-size:15px;color:#7a2a38;font-weight:500;margin-top:2px}
+.t{width:100%;border:3px solid var(--red);border-radius:12px;background:#fff;padding:13px;color:#3b1018;font-weight:500;text-align:center}
+.mx{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px;color:var(--org)}.mx input{width:120px;border-color:var(--org)}
+.dock{position:fixed;left:0;right:0;bottom:0;padding:12px 14px calc(12px + env(safe-area-inset-bottom));background:var(--bg);border-top:2px solid var(--tan);z-index:6}
+.dock>div{max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dock .btn{flex:1;font-size:19px;padding:16px}.dock .tv{font-size:24px;font-weight:800;min-width:110px}
+.sheet{position:fixed;inset:0;background:rgba(60,16,24,.55);z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.sheet>div{background:var(--bg);width:100%;max-width:720px;max-height:88vh;overflow:auto;border-radius:22px 22px 0 0;padding:16px}
+.sheet h3{margin:16px 0 4px;color:var(--org);letter-spacing:.12em;font-size:16px}
+.ag{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-top:2px solid var(--tan);font-size:18px;text-align:left}
+.q{display:flex;align-items:center;gap:12px}
+.q button{width:46px;height:46px;border:3px solid var(--org);border-radius:50%;background:none;color:var(--org);font-size:24px;font-weight:800;line-height:1}
+.q b{min-width:24px;text-align:center}
+.line{display:flex;gap:12px;align-items:center;padding:12px 0;border-top:2px solid var(--tan);text-align:left}
+.line:first-of-type{border-top:0}.line>div:first-child{flex:1}
+.tot{display:flex;justify-content:space-between;font-size:26px;font-weight:800;margin-top:14px}
+.tickets{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;padding:16px}
+.ticket{width:300px;background:#fff;color:#000;padding:14px;font:700 15px 'Courier New',monospace;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.25);text-align:left}
+.ticket h4{margin:0 0 6px;text-align:center;font-size:18px}
+.ticket .k{text-align:center;font-size:22px;border:2px solid #000;margin:6px 0;padding:4px}
+.ticket hr{border:0;border-top:2px dashed #000;margin:8px 0}
+.ticket .r{display:flex;justify-content:space-between;gap:8px}
+.ticket .md{padding-left:14px;font-size:14px}
+.ticket.c .it{font-size:20px;margin-top:8px}.ticket.c .md{font-size:18px}
+@media print{body{background:#fff;padding:0}.noprint{display:none!important}.tickets{display:block;padding:0}
+.ticket{width:72mm;box-shadow:none;border-radius:0;margin:0;break-after:page}}
+@page{margin:4mm}
+</style></head><body><div id="app"></div>
+<script>
+// ====== DATI: tutto dal Listino_Prezzi_Cassa_Ottobre_2025.xlsx ======
+// [nome, prezzo, ingredienti (solo dove indicati nel listino), categoria: P=pizza V=vegana X=extra]
+const P0=[["ALBINONI", 10.0, "pomodoro, mozzarella, peperoni, funghi, porchetta", "S", 0], ["ALFIO", 11.0, "", "A", 0], ["AMATRICIANA", 10.0, "pomodoro, mozzarella, pomodorini, cipolla, pancetta stufata, pecorino", "S", 0], ["ANGELO", 9.5, "", "A", 0], ["ANNA", 10.0, "", "V", 0], ["ANNALISA", 9.5, "mozzarella, pomodorini, origano, salamino, grana", "S", 0], ["AOSTA", 10.0, "", "A", 0], ["ARROTOLATO FORMAGGI", 9.5, "", "A", 0], ["ARROTOLATO TRADIZIONALE", 9.0, "", "A", 0], ["ASPARAGI", 8.5, "pomodoro, mozzarella, asparagi", "A", 1], ["BASSANO", 10.0, "", "A", 0], ["BAVARESE", 9.5, "", "A", 0], ["BOSCAIOLA", 10.0, "", "A", 0], ["BRIE E SPECK", 9.5, "pomodoro, mozzarella, brie, speck", "S", 0], ["BUFALA", 9.0, "pomodoro, mozzarella di bufala, mozzarella", "C", 0], ["CALABRESE", 10.0, "pomodoro, mozzarella, salamino piccante, olive, pomodoro secco, pecorino", "S", 0], ["CALZONE FARCITO", 9.0, "mozzarella, funghi, salamino, ricotta", "X", 0], ["CALZONE TRADIZIONALE", 8.5, "mozzarella, prosciutto, funghi", "X", 0], ["CALZONE VERDURE", 9.0, "", "X", 0], ["CAPRICCIOSA", 8.5, "pomodoro, mozzarella, prosciutto, funghi, carciofi", "C", 0], ["CARBONARA", 8.5, "", "A", 0], ["CARCIOFI", 7.5, "pomodoro, mozzarella, carciofi", "A", 1], ["CHIARA", 10.0, "", "V", 0], ["CHIODINI", 8.5, "pomodoro, mozzarella, chiodini", "A", 1], ["CLUB SANDWICH", 10.0, "pancetta, edamer, pomodoro, insalata, frittata", "X", 0], ["COMETA", 11.0, "", "A", 0], ["CONTADINA", 9.5, "", "A", 0], ["DEL BARBA", 9.5, "", "A", 0], ["DELICATA", 9.5, "", "A", 0], ["DIAVOLA", 8.0, "pomodoro, mozzarella, salamino piccante", "C", 0], ["ELENA", 10.0, "pomodoro, mozzarella di mais, porcini, melanzane", "V", 0], ["FOCACCIA", 4.0, "", "A", 0], ["FORMAGGI", 9.0, "pomodoro, mozzarella, emmental, grana, gorgonzola", "C", 0], ["FRA GALDINO", 10.5, "", "A", 0], ["FRANCESCO", 9.0, "", "A", 0], ["FRIARIELLI", 9.0, "pomodoro, mozzarella, friarielli", "A", 1], ["FRICO", 10.0, "", "A", 0], ["FUNGHI", 7.5, "pomodoro, mozzarella, funghi", "C", 0], ["GAMBERETTI", 9.0, "pomodoro, mozzarella, gamberetti", "A", 1], ["GIGI", 9.5, "", "A", 0], ["GIULIETTA", 10.5, "", "A", 0], ["GORGONZOLA", 8.0, "pomodoro, mozzarella, gorgonzola", "A", 1], ["GORGONZOLA E SPECK", 9.5, "pomodoro, mozzarella, gorgonzola, speck", "A", 1], ["GRECA", 10.0, "", "A", 0], ["KALOS", 10.0, "pomodoro, mozzarella, pomodorini, pancetta arrotolata, olive, feta", "S", 0], ["LUCIA", 10.0, "pomodoro, mozzarella di mais, patate al forno, zucchine, cipolla", "V", 0], ["LUPO", 9.5, "pomodoro, mozzarella, prosciutto, salsiccia, pancetta, wurstel, salamino", "S", 0], ["MARGHERITA", 6.5, "pomodoro, mozzarella", "C", 0], ["MARIKA", 9.5, "pomodoro, mozzarella, cipolla, gorgonzola, pomodorini, pancetta", "S", 0], ["MARINARA", 6.0, "pomodoro, origano, aglio, pomodoro a cubetti", "C", 0], ["MARINARA SUPER", 7.5, "", "A", 0], ["MARINO", 9.5, "", "A", 0], ["MEDITERRANEA", 9.5, "", "A", 0], ["MELANZANE", 7.5, "pomodoro, mozzarella, melanzane", "A", 1], ["MICHELANGELO", 10.0, "pomodoro, mozzarella di mais, patate al forno, peperoni, funghi", "V", 0], ["MIRIAM", 9.0, "", "A", 0], ["MODENA", 10.0, "", "A", 0], ["MOLISANA", 10.0, "pomodoro, mozzarella, patate al forno, salsiccia, pomodoro secco, pecorino", "S", 0], ["NAPOLETANA (M DOPPIA PASTA)", 7.5, "pomodoro, mozzarella", "A", 1], ["ORTOLANA", 10.0, "", "A", 0], ["PANINO", 7.0, "", "X", 0], ["PARMIGIANA", 10.0, "pomodoro, mozzarella, melanzane, crudo, grana", "S", 0], ["PATATE E SALSICCIA", 8.0, "pomodoro, mozzarella, patate, salsiccia", "C", 0], ["PATATE E WURSTEL", 8.0, "pomodoro, mozzarella, wurstel, patate", "C", 0], ["PATATE FRITTE", 4.0, "", "X", 0], ["PATATOSA", 7.5, "pomodoro, mozzarella, patate", "C", 0], ["PECOL", 10.0, "", "A", 0], ["PEPERONI", 7.5, "pomodoro, mozzarella, peperoni", "A", 1], ["PIADINA", 7.5, "", "X", 0], ["POMODORINI", 8.5, "pomodoro, mozzarella, pomodorini", "A", 1], ["PORCHETTA", 8.5, "pomodoro, mozzarella, porchetta", "A", 1], ["PORCINI", 9.0, "pomodoro, mozzarella, porcini", "A", 1], ["PROSCIUTTO", 7.5, "pomodoro, mozzarella, prosciutto", "C", 0], ["PROSCIUTTO E FUNGHI", 8.0, "pomodoro, mozzarella, prosciutto, funghi", "C", 0], ["PUGLIESE", 7.5, "", "A", 0], ["PUSTERIA", 9.5, "mozzarella, speck, patate al forno, stracchino, ricotta affumicata", "S", 0], ["REGIA", 10.0, "pomodoro, mozzarella, pancetta, scamorza, friarielli", "S", 0], ["RICOTTA E FRIARIELLI", 9.5, "pomodoro, mozzarella, ricotta, friarielli", "A", 1], ["ROMANA", 8.5, "", "A", 0], ["RONCADE", 9.5, "pomodoro, mozzarella, prosciutto, zucchine, stracchino", "S", 0], ["RUSTICA", 9.5, "pomodoro, mozzarella, melanzane, pancetta, grana", "S", 0], ["SALSICCIA E FRIARIELLI", 9.5, "pomodoro, mozzarella, salsiccia, friarielli", "A", 1], ["SAN DANIELE", 8.5, "pomodoro, mozzarella, prosciutto crudo", "S", 0], ["SAN LAZZARO", 10.0, "pomodoro, mozzarella, ricotta, chiodini, melanzane, crudo", "S", 0], ["SAN ROCCO", 9.0, "", "A", 0], ["SAPORITA", 9.5, "", "A", 0], ["SCARLATTI", 10.0, "pomodoro, mozzarella, melanzane, brie, porchetta", "S", 0], ["SICILIANA", 10.0, "pomodoro, mozzarella, acciughe, capperi, olive", "S", 0], ["SIOR NANE", 9.5, "", "A", 0], ["SONIA", 8.0, "", "A", 0], ["STAGIONI", 8.5, "pomodoro, mozzarella, prosciutto, funghi, wurstel, carciofi", "C", 0], ["TIRRENA", 10.0, "pomodoro, mozzarella, pomodorini, burrata, friarielli, ricotta affumicata", "S", 0], ["TOAST CLASSICO (SOLO P)", 7.0, "mozzarella, prosciutto", "X", 0], ["TONNO", 8.5, "pomodoro, mozzarella, tonno", "A", 1], ["TONNO E CIPOLLA", 9.0, "pomodoro, mozzarella, tonno, cipolla", "C", 0], ["TRIS DI FUNGHI", 9.0, "", "A", 0], ["VALTELLINA", 10.0, "pomodoro, mozzarella, bresaola, rucola, grana", "S", 0], ["VERDURE", 8.5, "pomodoro, mozzarella, peperoni, melanzane, zucchine, pomodoro a cubetti", "C", 0], ["VIENNESE", 7.5, "pomodoro, mozzarella, wurstel", "C", 0], ["VIVALDI", 9.5, "", "A", 0], ["ZUCCHINE", 7.5, "pomodoro, mozzarella, zucchine", "A", 1], ["BASE PIZZA", 7.0, "", "B", 0]];
+
+
+// ====== STORICO ORDINI (salvato sul dispositivo) ======
+const dk=t=>new Date(t).toLocaleDateString('sv-SE');
+function loadH(){try{const a=JSON.parse(localStorage.getItem('pizzeriaOrders'));if(Array.isArray(a))return a}catch(e){}return[]}
+let H=loadH();
+function saveH(){try{localStorage.setItem('pizzeriaOrders',JSON.stringify(H))}catch(e){alert('Impossibile salvare lo storico su questo dispositivo')}}
+const np=o=>o.items.reduce((s,l)=>s+l.q,0);
+const stats=a=>`<div class="stats"><div><b>${a.length}</b>ordini</div><div><b>${a.reduce((s,o)=>s+np(o),0)}</b>pizze</div><div><b>${E(a.reduce((s,o)=>s+o.tot,0))}</b>incasso</div></div>`;
+function csv(){const q=s=>'"'+String(s).replace(/"/g,'""')+'"',n=x=>String(x).replace('.',','),r=[['Data','Ora','Ordine','Cliente','Pizza','Quantita','Prezzo unitario','Totale riga','Modifiche'].join(';')];
+ H.forEach(o=>o.items.forEach(l=>r.push([new Date(o.t).toLocaleDateString('it-IT'),new Date(o.t).toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'}),o.n,q(o.name||''),q(l.h),l.q,n(l.u.toFixed(2)),n((l.u*l.q).toFixed(2)),q(l.m.join(' | '))].join(';'))));return r.join('\r\n')}
+function vHist(){const days={};H.forEach((o,i)=>(days[dk(o.t)]=days[dk(o.t)]||[]).push([o,i]));const keys=Object.keys(days).sort().reverse();
+ return`<div class="bar"><button class="btn" data-a="back">‹ Menu</button><h2>STORICO ORDINI</h2><span></span></div><div class="wrap n">
+<div class="box"><h3>TOTALE COMPLESSIVO</h3>${stats(H)}</div>
+${keys.map(k=>{const a=days[k];return`<div class="box"><h3>${new Date(a[0][0].t).toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).toUpperCase()}</h3>${stats(a.map(x=>x[0]))}<div style="margin-top:12px">
+${a.slice().reverse().map(([o,i])=>`<button class="row" data-a="ho" data-i="${i}"><span class="nm">N° ${o.n} · ${new Date(o.t).toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'})}${o.name?' · '+esc(o.name):''}<small>${o.items.map(l=>l.q+'x '+esc(l.h)).join(', ')}</small></span><span class="pill">${np(o)} pz</span><span class="pill">${E(o.tot)}</span></button>`).join('')}</div></div>`}).join('')||'<p class="empty">Nessun ordine registrato.</p>'}
+<div class="chips" style="margin:18px 0"><button class="btn" data-a="hexp" ${H.length?'':'disabled'}>Esporta (CSV per Excel)</button><button class="btn" data-a="hclr" ${H.length?'':'disabled'}>Cancella storico</button></div></div>`}
+// ====== DATABASE PIZZE (salvato sul dispositivo; P0 = listino iniziale) ======
+const pf=s=>{const n=parseFloat(String(s).replace(',','.'));return isNaN(n)?null:n};
+const norm=r=>{r=[...r];r[4]=r[4]||0;r[5]=r[5]||null;return r};
+const sortP=()=>P.sort((a,b)=>a[0].localeCompare(b[0],'it'));
+const ensureBase=()=>{if(!P.some(p=>p[3]=='B'))P.push(['BASE PIZZA',7,'','B',0,null])};
+function load(){try{const a=JSON.parse(localStorage.getItem('pizzeriaDB'));if(Array.isArray(a)&&a.length)return a.map(norm)}catch(e){}return P0.map(norm)}
+let P=load();ensureBase();sortP();
+function save(){try{localStorage.setItem('pizzeriaDB',JSON.stringify(P))}catch(e){alert('Impossibile salvare su questo dispositivo')}}
+function dl(){dlf('pizze.json',JSON.stringify(P),'application/json')}
+function dlf(n,x,m){const u=URL.createObjectURL(new Blob([x],{type:m})),a=document.createElement('a');a.href=u;a.download=n;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000)}
+function imp(inp){const f=inp.files[0];if(!f)return;f.text().then(x=>{try{const a=JSON.parse(x);if(!Array.isArray(a)||!a.every(r=>Array.isArray(r)&&typeof r[0]=='string'&&typeof r[1]=='number'))throw 0;P=a.map(norm);ensureBase();sortP();save();R();alert('Listino importato')}catch(e){alert('File non valido')}})}
+const CATL=[['S','Speciali'],['C','Classiche'],['V','Vegane'],['X','Extra'],['A','Altre pizze']];
+function dbItems(){const q=(S.q||'').toUpperCase();return P.map((p,i)=>[p,i]).filter(([p])=>(!q||p[0].includes(q))&&(!S.f||(S.f=='ni'?!p[2]&&p[3]!='B':S.f=='nm'?!p[5]&&p[3]!='B'&&p[3]!='X':p[3]==S.f)))}
+function dbList(){return dbItems().map(([p,i])=>`<button class="row" data-a="edit" data-i="${i}"><span class="nm">${esc(p[0])}${p[4]?' <b class="qm" style="position:static;display:inline-block">?</b>':''}<small>${p[3]=='B'?'Base per pizze personalizzate':(CATL.find(c=>c[0]==p[3])||[])[1]+' · '+(esc(p[2])||'nessun ingrediente')}</small></span><span class="pill">${E(p[1])}</span>${p[3]=='B'||p[3]=='X'?'':`<span class="pill" style="--c:var(--org)">${p[5]?'MAXI '+E(p[5]).slice(2):'MAXI —'}</span>`}</button>`).join('')||'<p class="empty">Nessuna voce.</p>'}
+function vDb(){const F=[['','Tutte'],...CATL,['ni','Senza ingredienti'],['nm','Senza MAXI']];
+ return`<div class="bar"><button class="btn" data-a="back">‹ Menu</button><h2>DATABASE PIZZE</h2><button class="btn fill" data-a="new">+ Nuova</button></div>
+<div class="wrap n"><p class="empty">${P.length-1} voci · ${P.filter(p=>!p[2]&&p[3]!='B').length} senza ingredienti · ${P.filter(p=>!p[5]&&p[3]!='B'&&p[3]!='X').length} senza MAXI</p>
+<input class="t" placeholder="Cerca una pizza…" value="${esc(S.q||'')}" oninput="S.q=this.value;document.getElementById('dbl').innerHTML=dbList()">
+<div class="chips" style="margin:12px 0">${F.map(f=>`<button class="chip ${(S.f||'')==f[0]?'on':''}" data-a="flt" data-v="${f[0]}">${f[1]}</button>`).join('')}</div>
+<div id="dbl">${dbList()}</div>
+<div class="chips" style="margin:18px 0"><button class="btn" data-a="export">Esporta backup</button><button class="btn" data-a="impb">Importa backup</button><button class="btn" data-a="reset">Ripristina iniziale</button></div>
+<input type="file" id="imp" accept=".json,application/json" hidden onchange="imp(this)"></div>`}
+function vEdit(){const e=S.e,B=e.c=='B';
+ return`<div class="bar"><button class="btn" data-a="dbback">‹ Database</button><h2>${e.i<0?'NUOVA PIZZA':'MODIFICA'}</h2><span></span></div>
+<div class="wrap n"><div class="box"><label class="lbl">NOME</label><input class="t l" value="${esc(e.n)}" oninput="S.e.n=this.value" ${B?'disabled':''}>
+${B?'':`<label class="lbl">CATEGORIA</label><div class="chips">${CATL.map(c=>`<button class="chip ${e.c==c[0]?'on':''}" data-a="ec" data-v="${c[0]}">${c[1]}</button>`).join('')}</div>`}
+<label class="lbl">PREZZO €</label><input class="t l" inputmode="decimal" value="${esc(e.p)}" oninput="S.e.p=this.value">
+${B||e.c=='X'?'':`<label class="lbl">PREZZO MAXI € (vuoto = si inserisce a mano in cassa)</label><input class="t l" inputmode="decimal" value="${esc(e.m)}" oninput="S.e.m=this.value">`}
+${B?'':`<label class="lbl">INGREDIENTI (separati da virgola)</label><textarea class="t l" oninput="S.e.g=this.value">${esc(e.g)}</textarea>
+<div class="chips" style="margin-top:12px"><button class="chip ${e.a?'on':''}" data-a="eau">? Ingredienti da verificare</button></div>`}</div>
+<div style="display:flex;gap:10px">${e.i>=0&&!B?'<button class="btn" data-a="edel">Elimina</button>':''}<button class="btn fill" style="flex:1;font-size:19px" data-a="esave">Salva</button></div></div>`}
+// Aggiunte: [gruppo, prezzo, voci separate da |]
+const AG=[['Verdure',.5,'Patate|Rucola|Cipolla|Panc. stuf.'],['Prosciutto cotto e altro',.5,'Prosciutto|Salsiccia|Carciofi|Funghi champignon|Ricotta fresca|Mais'],
+['Formaggi e altro',1,'Formaggi|Stracchino|Uovo|Radicchio Chioggia|Salamino'],['Affettati',1.5,'Panc. arr.|Crudo|Speck|Bresaola'],
+['Altro',1.5,'Asparagi|Chiodini|Crema di zucca|Grana e formaggio vecchio|Noci|Pesto|Pomini|Pomodoro secco|Tonno|Radicchio TV|Radicchio Verdon|Burrata (mezza pizza)'],
+['Speciali',2,'Acciughe|Bufala|Friarielli|Gamberetti|Solo bufala'],['Premium',2.5,'Burrata|Olive|Porcini|Mozz. senza lattosio / vegana']];
+const PR={};AG.forEach(g=>g[2].split('|').forEach(n=>PR[n]=g[1]));PR['Mais']=.5;
+// Prezzo del "Doppio" = prezzo dell'aggiunta equivalente; 0 se non c'è nel listino (DA CONFERMARE)
+const DP=[[/mais/,2.5],[/bufala/,2],[/burrata/,2.5],[/acciughe|gamberetti|friarielli/,2],[/porcini|olive/,2.5],
+[/chiodini|asparagi|tonno|noci|pesto|pomodoro secco|grana|pecorino|crudo|speck|bresaola|bres/,1.5],
+[/gorgonzola|emmental|brie|scamorza|feta|stracchino|salamino|ricotta affumicata/,1],
+[/prosciutto|salsiccia|carciofi|funghi|patate|rucola|cipolla|pancetta|peperoni|zucchine|melanzane|pomodorini|ricotta/,.5]];
+const dp=n=>{for(const[r,p]of DP)if(r.test(n))return p;return 0};
+const SZ=[['N','Normale'],['B','Battuta'],['F','Formato Famiglia'],['M','MAXI'],['Y','Baby']];
+const IM=[['','Impasto normale',0],['DP','Doppia pasta',1],['MC','Multicereale',1.5],['SG','Senza glutine',4]];
+// ====== LOGICA ======
+const E=n=>'€ '+n.toFixed(2).replace('.',',');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const ab=n=>cap(n.replace('pancetta arrotolata','panc. arr.').replace('pancetta stufata','panc. stuf.').replace('mozzarella','mozz.').replace('pomodoro','pom.'));
+let S={hist:false,view:'menu',tab:'S',d:null,sheet:false,cart:[],name:'',order:null};
+const mx=d=>parseFloat(String(d.maxi||'').replace(',','.'))||0;
+const szAdj=d=>({N:0,B:2,F:4.5,M:0,Y:/^MARG|^MARIN/.test(d.p[0])?-.5:-1}[d.size]);
+function unit(d){let t=(d.size=='M'?d.p[5]||mx(d)||d.p[1]:d.p[1])+szAdj(d)+IM.find(i=>i[0]==d.imp)[2];
+ d.ing.forEach(x=>{if(x.s==2)t+=dp(x.n)});for(const k in d.agg)t+=PR[k]*d.agg[k];return t}
+function head(d){return d.p[0]+(d.size!='N'?' - '+SZ.find(s=>s[0]==d.size)[1].toUpperCase():'')}
+function mods(d){const m=[];if(d.imp)m.push(IM.find(i=>i[0]==d.imp)[1].toUpperCase());
+ d.ing.forEach(x=>{if(x.s==1)m.push('NO '+ab(x.n));if(x.s==2)m.push('DOPPIO '+ab(x.n))});
+ for(const k in d.agg)m.push('+ '+k+(d.agg[k]>1?' x'+d.agg[k]:''));if(d.note)m.push('>> '+d.note);return m}
+function newDraft(p){return{p,cat:p[3],size:'N',imp:'',maxi:'',agg:{},note:'',ing:p[2]?p[2].split(',').map(s=>({n:s.trim(),s:0})):[]}}
+const total=()=>S.cart.reduce((t,l)=>t+l.u*l.q,0);
+const nCart=()=>S.cart.reduce((t,l)=>t+l.q,0);
+
+function vMenu(){const list=P.filter(p=>p[3]==S.tab);
+ const col=S.tab=='V'?'var(--grn)':'var(--red)';
+ const tb=(k,t,c)=>`<button data-a="tab" data-v="${k}" class="${S.tab==k?'on':''}" style="--c:${c||'var(--red)'}">${t}</button>`;
+ return`<div class="logo"><b>PIZZERIA</b><span>SAN LAZZARO</span><small>CON FORNO A LEGNA</small></div>
+<nav class="tabs">${tb('S','Speciali')}${tb('C','Classiche')}${tb('V','Vegane','var(--grn)')}${tb('X','Extra')}${tb('A','Altre pizze')}</nav>
+<div class="wrap"><button class="base" data-a="base">BASE PIZZA · € 7,00<small>Componi la tua pizza (se non è una margherita)</small></button><div class="grid">${list.map(p=>`<button class="pz" data-a="pz" data-i="${P.indexOf(p)}" style="--c:${col}">${p[4]?'<b class="qm">?</b>':''}<span>${esc(p[0])}</span><i class="pill">${E(p[1])}</i></button>`).join('')}</div><div class="chips" style="padding:6px 0 24px"><button class="btn" data-a="hist">🧾 Storico ordini</button><button class="btn" data-a="db">⚙ Database pizze</button></div></div>
+${S.cart.length?`<div class="dock"><div><button class="btn fill" data-a="cart" style="display:flex;justify-content:space-between"><span>Ordine (${nCart()})</span><span>${E(total())}</span></button></div></div>`:''}`}
+
+function vPizza(){const d=S.d,x=d.cat=='X',col=d.cat=='V'?'var(--grn)':'var(--red)';
+ const ok=k=>k=='N'||(!x&&k!='M')||(!x&&k=='M');
+ return`<div class="bar" style="color:${col}"><button class="btn" data-a="back">‹ Menu</button><h2>${esc(d.p[0])}</h2><span></span></div>
+<div class="wrap n">
+<div class="box o"><h3>DIMENSIONE</h3><div class="chips">${SZ.map(s=>`<button class="chip ${d.size==s[0]?'on':''}" data-a="size" data-v="${s[0]}" ${ok(s[0])?'':'disabled'}>${s[1]}${s[0]=='M'&&d.p[5]?' '+E(d.p[5]):''}</button>`).join('')}</div>
+${d.size=='M'&&!d.p[5]?`<div class="mx">Prezzo MAXI € <input class="t" inputmode="decimal" placeholder="0,00" value="${esc(d.maxi)}" oninput="S.d.maxi=this.value;upd()"></div>`:''}
+${x?'':`<h3 class="sub">IMPASTO</h3><div class="chips">${IM.map(i=>`<button class="chip ${d.imp==i[0]?'on':''}" data-a="imp" data-v="${i[0]}">${i[1]}${i[2]?' +'+E(i[2]).slice(2):''}</button>`).join('')}</div>`}</div>
+<div class="box"><h3>INGREDIENTI${d.p[4]?' ?':''}</h3>${d.p[4]?'<p class="empty">? Ingredienti generati automaticamente dal nome della pizza: da verificare.</p>':''}${d.ing.length?d.ing.map((g,i)=>`<div class="ing ${g.s==1?'x':''}"><span>${cap(g.n)}${g.s==2?' <b class="pill">x2</b>':''}</span>
+<button data-a="del" data-i="${i}" class="${g.s==1?'on':''}">Cancella</button><button data-a="dbl" data-i="${i}" class="${g.s==2?'on':''}">Doppio${dp(g.n)?' +'+E(dp(g.n)).slice(2):''}</button></div>`).join(''):(d.cat=='B'?'<p class="empty">Base 7,00 € + gli ingredienti scelti dalle Aggiunte.</p>':'<p class="empty">Il listino Excel non indica gli ingredienti di questa pizza.<br>Usa Aggiunte e Note per le modifiche.</p>')}</div>
+<div class="box o"><h3>AGGIUNTE</h3><div class="chips">${Object.keys(d.agg).map(k=>`<span class="chip on">${k}${d.agg[k]>1?' x'+d.agg[k]:''}</span>`).join('')}<button class="chip" data-a="sheet">+ Aggiunte</button></div></div>
+<div class="box"><input class="t" placeholder="Note per la cucina (es. ben cotta)" value="${esc(d.note)}" oninput="S.d.note=this.value;upd()"></div>
+<div class="box"><h3>RIEPILOGO</h3><div id="sm"></div></div></div>
+<div class="dock"><div><span class="tv"></span><button class="btn fill" data-a="ok">Conferma pizza</button></div></div>
+${S.sheet?`<div class="sheet" data-a="bg"><div><div class="bar" style="position:static;border:0;padding:0 0 6px;grid-template-columns:1fr auto"><h2 style="text-align:left">AGGIUNTE</h2><button class="btn org fill" data-a="close">Fatto</button></div>
+${AG.map(g=>`<h3>${g[0].toUpperCase()} +${E(g[1]).slice(2)}</h3>`+g[2].split('|').map(n=>`<div class="ag"><span>${n}</span><div class="q"><button data-a="am" data-v="${esc(n)}">−</button><b>${d.agg[n]||0}</b><button data-a="ap" data-v="${esc(n)}">+</button></div></div>`).join('')).join('')}</div></div>`:''}`}
+function upd(){const d=S.d;if(!d)return;document.querySelectorAll('.tv').forEach(e=>e.textContent=E(unit(d)));
+ const s=document.getElementById('sm');if(s)s.innerHTML=`<b>${esc(head(d))}</b>${mods(d).map(m=>`<div class="m">${esc(m)}</div>`).join('')}`}
+
+function vCart(){return`<div class="bar"><button class="btn" data-a="back">‹ Menu</button><h2>ORDINE</h2><span></span></div><div class="wrap n"><div class="box">
+${S.cart.map((l,i)=>`<div class="line"><div><b>${esc(l.h)}</b>${l.m.map(m=>`<div class="m">${esc(m)}</div>`).join('')}</div>
+<div class="q"><button data-a="lm" data-i="${i}">−</button><b>${l.q}</b><button data-a="lp" data-i="${i}">+</button></div><b style="min-width:86px;text-align:right">${E(l.u*l.q)}</b></div>`).join('')||'<p>Nessuna pizza nell’ordine.</p>'}
+<div class="tot"><span>Totale</span><span>${E(total())}</span></div></div>
+<div class="box"><input class="t" placeholder="Nome cliente / tavolo (facoltativo)" value="${esc(S.name)}" oninput="S.name=this.value"></div>
+<div style="display:flex;gap:10px"><button class="btn" data-a="clear">Annulla</button><button class="btn fill" style="flex:1;font-size:19px" data-a="done" ${S.cart.length?'':'disabled'}>Conferma ordine e crea biglietto</button></div></div>`}
+
+function tk(o,kind){const c=kind=='CUCINA',t=new Date(o.t);
+ return`<div class="ticket ${c?'c':''}"><h4>PIZZERIA SAN LAZZARO</h4><div class="k">${kind} · N° ${o.n}</div>
+<div class="r"><span>${t.toLocaleDateString('it-IT')}</span><span>${t.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'})}</span></div>${o.name?`<div>${esc(o.name)}</div>`:''}<hr>
+${o.items.map(l=>`<div class="it r"><span>${l.q}x ${esc(l.h)}</span>${c?'':`<span>${E(l.u*l.q)}</span>`}</div>${l.m.map(m=>`<div class="md">${esc(m)}</div>`).join('')}`).join('')}
+<hr>${c?`<div class="r"><span>Pizze</span><span>${o.items.reduce((s,l)=>s+l.q,0)}</span></div>`:`<div class="r" style="font-size:20px"><span>TOTALE</span><span>${E(o.tot)}</span></div>`}</div>`}
+function vTicket(){const o=S.order;return`<div class="bar noprint" style="grid-template-columns:1fr auto auto"><h2 style="text-align:left">ORDINE N° ${o.n}</h2><button class="btn" data-a="print">Stampa</button>${S.hist?'<button class="btn fill" data-a="hb">‹ Storico</button>':'<button class="btn fill" data-a="neworder">Nuovo ordine</button>'}</div>
+<div class="tickets">${tk(o,'CASSA')}${tk(o,'CUCINA')}</div>`}
+
+function R(){const sh=document.querySelector('.sheet>div'),st=sh?sh.scrollTop:0;
+ document.getElementById('app').innerHTML=({hist:vHist,menu:vMenu,pizza:vPizza,cart:vCart,ticket:vTicket,db:vDb,dbedit:vEdit})[S.view]();
+ const n=document.querySelector('.sheet>div');if(n)n.scrollTop=st;upd()}
+function nextNum(){const d=dk(Date.now());return H.filter(o=>dk(o.t)==d).reduce((m,o)=>Math.max(m,o.n),0)+1}
+document.addEventListener('click',e=>{const el=e.target.closest('[data-a]');if(!el)return;const a=el.dataset.a,i=+el.dataset.i,v=el.dataset.v,d=S.d;
+ if(a=='bg'&&e.target!==el)return;
+ if(a=='tab')S.tab=v;
+ else if(a=='db'){S.view='db';S.q='';S.f=''}
+ else if(a=='dbback')S.view='db';
+ else if(a=='flt')S.f=v;
+ else if(a=='edit'){const p=P[i];S.e={i,n:p[0],c:p[3],p:String(p[1]).replace('.',','),m:p[5]?String(p[5]).replace('.',','):'',g:p[2],a:p[4]};S.view='dbedit'}
+ else if(a=='new'){S.e={i:-1,n:'',c:'A',p:'',m:'',g:'',a:0};S.view='dbedit'}
+ else if(a=='ec')S.e.c=v;
+ else if(a=='eau')S.e.a=S.e.a?0:1;
+ else if(a=='esave'){const e=S.e,pr=pf(e.p);if(!e.n.trim()){alert('Inserisci il nome');return}if(pr==null||pr<0){alert('Inserisci un prezzo valido');return}
+  const row=[e.n.trim().toUpperCase(),pr,e.g.split(',').map(s=>s.trim().toLowerCase()).filter(Boolean).join(', '),e.c,e.a?1:0,pf(e.m)||null];
+  if(e.i>=0)P[e.i]=row;else P.push(row);sortP();save();S.view='db'}
+ else if(a=='edel'){if(confirm('Eliminare questa pizza dal database?')){P.splice(S.e.i,1);save();S.view='db'}}
+ else if(a=='export')dl();
+ else if(a=='impb'){document.getElementById('imp').click();return}
+ else if(a=='reset'){if(confirm('Ripristinare il listino iniziale? Le modifiche fatte andranno perse.')){try{localStorage.removeItem('pizzeriaDB')}catch(e){}P=P0.map(norm);ensureBase();sortP()}}
+ else if(a=='base'){S.d=newDraft(P.find(p=>p[3]=='B'));S.view='pizza';S.sheet=true}
+ else if(a=='pz'){S.d=newDraft(P[i]);S.view='pizza'}
+ else if(a=='back')S.view='menu';
+ else if(a=='size')d.size=v;
+ else if(a=='imp')d.imp=v;
+ else if(a=='del')d.ing[i].s=d.ing[i].s==1?0:1;
+ else if(a=='dbl')d.ing[i].s=d.ing[i].s==2?0:2;
+ else if(a=='sheet')S.sheet=true;
+ else if(a=='close'||a=='bg')S.sheet=false;
+ else if(a=='ap')d.agg[v]=(d.agg[v]||0)+1;
+ else if(a=='am'){if(d.agg[v]>1)d.agg[v]--;else delete d.agg[v]}
+ else if(a=='ok'){if(d.size=='M'&&!d.p[5]&&!mx(d)){alert('Inserisci il prezzo MAXI');return}S.cart.push({h:head(d),m:mods(d),u:unit(d),q:1});S.view='menu'}
+ else if(a=='cart')S.view='cart';
+ else if(a=='lp')S.cart[i].q++;
+ else if(a=='lm'){if(--S.cart[i].q<1)S.cart.splice(i,1);if(!S.cart.length)S.view='menu'}
+ else if(a=='clear'){if(confirm('Annullare tutto l’ordine?')){S.cart=[];S.name='';S.view='menu'}}
+ else if(a=='done'){S.order={n:nextNum(),t:Date.now(),name:S.name,items:JSON.parse(JSON.stringify(S.cart)),tot:total()};H.push(S.order);saveH();S.hist=false;S.view='ticket'}
+ else if(a=='hist')S.view='hist';
+ else if(a=='ho'){S.order=H[i];S.hist=true;S.view='ticket'}
+ else if(a=='hb'){S.hist=false;S.view='hist'}
+ else if(a=='hexp')dlf('storico-ordini.csv','\ufeff'+csv(),'text/csv')
+ else if(a=='hclr'){if(confirm('Cancellare TUTTO lo storico ordini? Non si può annullare.')){H=[];saveH()}}
+ else if(a=='print')window.print();
+ else if(a=='neworder'){S.cart=[];S.name='';S.order=null;S.view='menu'}
+ R();if(['ok','back','done','new','pz','tab','cart','hist','ho','hb','db','dbback','edit','esave','edel','base'].includes(a))window.scrollTo(0,0)});
+R();
+</script></body></html>
